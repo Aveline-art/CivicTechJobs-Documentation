@@ -30,6 +30,6 @@ jobs:
       - run: |
           cd docs
           cat > .nojekyll
-      - run: git add -a
+      - run: git add -A
       - run: git commit -m "Deployed with mkdocs build"
       - run: git push
