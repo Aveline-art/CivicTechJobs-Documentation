@@ -28,7 +28,7 @@ jobs:
           cd mkdocs
           mkdocs build
       - name: Commit docs
-      - run: |
+        run: |
           cd docs
           cat > .nojekyll
           git add -A
