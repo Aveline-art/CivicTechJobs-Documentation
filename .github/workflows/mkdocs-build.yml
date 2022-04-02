@@ -25,6 +25,7 @@ jobs:
       - name: Publish docs
         run: |
           cd mkdocs
+          ls
           mkdocs build
       - run: |
           cd docs
