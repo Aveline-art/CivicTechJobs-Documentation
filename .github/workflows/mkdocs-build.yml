@@ -6,19 +6,28 @@ on:
     branches:
       - main
     paths:
-      - "**.md"
-      - "mkdocs.yml"
+      - "mkdocs/**/**.md"
+      - "mkdocs/mkdocs.yml"
   workflow_dispatch:
 
 jobs:
   docs:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repo
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - uses: actions/setup-python@v3
+      - run: cd mkdocs
+      - name: Install mkdocs
+        uses: actions/setup-python@v3
       - run: pip install --upgrade pip && pip install mkdocs
       - run: git config user.name 'github-actions[bot]' && git config user.email 'github-actions[bot]@users.noreply.github.com'
       - name: Publish docs
-        run: mkdocs gh-deploy
+        run: mkdocs build
+      - run: cd ..
+      - run: cd docs
+      - run: cat > .nojekyll
+      - run: git add -a
+      - run: git commit -m "Deployed with mkdocs build"
+      - run: git push
