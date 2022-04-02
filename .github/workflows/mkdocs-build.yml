@@ -19,6 +19,7 @@ jobs:
         with:
           fetch-depth: 0
       - run: cd mkdocs
+      - run: ls
       - name: Install mkdocs
         uses: actions/setup-python@v3
       - run: pip install --upgrade pip && pip install mkdocs
